@@ -257,8 +257,17 @@ void DynamicGiri::findPotentialDependencies(DynBasicBlock *dynBB,
                                             TraceFile trace) {
     //find the control dependent of the basic blocks.
     //From the post dominator tree, get the post-dominators for **block**
-    BasicBlock bb = dynBB->getBasicBlock();
 
+    //get the post dominator tree for the function
+    PostDominanceFrontier &PDF = getAnalysis<PostDominanceFrontier>(*F);
+    PostDominatorTree &PDT = getAnalysis<PostDominatorTree>(*F);
+
+
+    BasicBlock bb = dynBB->getBasicBlock();
+    for (Instruction &I : bb) {
+        DynValue *last_instruction = trace.getLastDynValue(&I);
+
+    }
 }
 
 void DynamicGiri::printBackwardsSlice(const Instruction *Criterion,
