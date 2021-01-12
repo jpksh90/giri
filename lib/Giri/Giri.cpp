@@ -218,6 +218,13 @@ void DynamicGiri::findSlice(DynValue &Initial,
             DynValue DTerminator = Forcer.getTerminator();
             Trace->addToWorklist(DTerminator, Worklist, *DV);
           }
+
+          //TODO: Find the potential dependence of the basic block and add it to the worklist
+          DynBasicBlock potentialDeps = findPotentialDependencies(DBB, DBB.getBasicBlock(), Trace);
+          if (potentialDeps != nullptr) {
+              DynValue DTerminator = potentialDeps.getTerminator();
+              Trace->addtoWorklist(DTerminator, Worklist, *DV);
+          }
         }
       }
     }
@@ -243,6 +250,15 @@ void DynamicGiri::findSlice(DynValue &Initial,
   // Update the statistics on lost loads.
   NumLoadsTraced = Trace->totalLoadsTraced;
   NumLoadsLost = Trace->lostLoadsTraced;
+}
+
+void DynamicGiri::findPotentialDependencies(DynBasicBlock *dynBB,
+                                            std::set<unsigned> bbNums,
+                                            TraceFile trace) {
+    //find the control dependent of the basic blocks.
+    //From the post dominator tree, get the post-dominators for **block**
+    BasicBlock bb = dynBB->getBasicBlock();
+
 }
 
 void DynamicGiri::printBackwardsSlice(const Instruction *Criterion,

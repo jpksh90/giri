@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:14.04
 
 MAINTAINER Mingliang Liu <liuml07@gmail.com>
 
@@ -8,7 +8,7 @@ ENV TEST_PARALLELISM seq
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -qq -y wget make g++ python zip unzip autoconf libtool automake
+RUN apt-get install -qq -y wget make g++ python zip unzip autoconf libtool automake vim xz-utils
 
 ADD . giri
 

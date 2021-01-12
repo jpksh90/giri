@@ -23,6 +23,17 @@ case $VERSION in
                 mv clang-3.4 $LLVM_HOME/tools/clang
                 mv compiler-rt-3.4 $LLVM_HOME/projects/compiler-rt
 				;;
+		"11.0")
+				wget https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang-11.0.0.src.tar.xz
+				wget https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/llvm-11.0.0.src.tar.xz
+				wget https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/compiler-rt-11.0.0.src.tar.xz
+				tar xf clang-11.0.0.src.tar.xz && rm -f clang-11.0.0.src.tar.xz
+				tar xf llvm-11.0.0.src.tar.xz && rm -f llvm-11.0.0.src.tar.xz
+				tar xf compiler-rt-11.0.0.src.tar.xz && rm -f compiler-rt-11.0.0.src.tar.xz
+				mv llvm-11.0.0.src $LLVM_HOME
+				mv clang-11.0.0.src $LLVM_HOME/tools/clang
+				mv compiler-rt-11.0.0.src $LLVM_HOME/projects/compiler-rt
+				;;
 esac
 
 mkdir -p $LLVM_HOME/build
